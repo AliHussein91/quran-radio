@@ -1,0 +1,12 @@
+{
+  "name": "quran-radio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch:scss": "sass --watch style/main.scss style/main.css"
+  },
+  "author": "Ali Hussein",
+  "license": "ISC",
+  "description": ""
+}
