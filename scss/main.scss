@@ -1,0 +1,183 @@
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+}
+
+body {
+	position: relative;
+	z-index: 0;
+	overflow: hidden;
+	min-height: 100vh;
+	min-width: 100vw;
+	height: 100%;
+	width: 100%;
+	background-image: url(../assets/img/bg-full.webp);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	display: flex;
+	flex-grow: row wrap;
+	justify-content: center;
+	align-items: center;
+	&::after {
+		position: absolute;
+		inset: 0;
+		margin: auto;
+		height: 100vh;
+		width: 100vw;
+		background-color: rgba(255, 255, 255, 0.055);
+		backdrop-filter: grayscale(90%);
+		z-index: -1;
+		content: '';
+	}
+	.glitter-sm {
+		height: 50px;
+		width: 50px;
+		border-radius: 25px;
+		position: absolute;
+		top: 50px;
+		left: 50px;
+		// background-color: rgba(255, 166, 0, 0.644);
+		filter: blur(5px);
+		backdrop-filter: blur(2px);
+		opacity: 0.3;
+		z-index: 1;
+	}
+	.audio-player {
+		display: none;
+		visibility: hidden;
+	}
+
+	.controls {
+		padding: 20px 30px;
+		display: flex;
+		gap: 30px;
+		box-shadow: 0px 1px 2px black;
+		backdrop-filter: saturate(10.5);
+		.play,
+		.pause {
+			position: relative;
+			z-index: 999;
+			background: transparent;
+			outline: none;
+			border: none;
+			width: min-content;
+			padding: 15px;
+			border-radius: 10px;
+			transition: all 0.1s ease-in-out;
+			background: none;
+			cursor: pointer;
+			svg {
+				width: 100px;
+				height: 100px;
+				filter: drop-shadow(0 2px 1px rgb(0, 0, 0));
+				transition: all 0.1s ease-in-out;
+			}
+			&:not(:disabled):hover rect:first-child,
+			&:not(:disabled):hover path {
+				filter: brightness(95%);
+				transition: all 0.1s ease-in-out;
+			}
+			&:active svg {
+				// filter: brightness(95%);
+				transition: all 0.1s ease-in-out;
+			}
+			&:disabled {
+				cursor: default;
+				svg {
+					filter: brightness(95%);
+					cursor: default;
+					pointer-events: none;
+				}
+			}
+		}
+	}
+}
+
+// .firefly {
+// 	position: fixed;
+// 	left: 50%;
+// 	top: 50%;
+// 	width: 0.4vw;
+// 	height: 0.4vw;
+// 	margin: (-0.2vw) 0 0 9.8vw;
+// 	animation: ease 200s alternate infinite;
+// 	pointer-events: none;
+// 	z-index: 100;
+
+// 	&::before,
+// 	&::after {
+// 	  content: "";
+// 	  position: absolute;
+// 	  width: 100%;
+// 	  height: 100%;
+// 	  border-radius: 50%;
+// 	  transform-origin: -10vw;
+// 	}
+
+// 	&::before {
+// 	  background: black;
+// 	  opacity: 0.4;
+// 	  animation: drift ease alternate infinite;
+// 	}
+
+// 	&::after {
+// 	  background: white;
+// 	  opacity: 0;
+// 	  box-shadow: 0 0 0vw 0vw yellow;
+// 	  animation: drift ease alternate infinite, flash ease infinite;
+// 	}
+//   }
+
+//   // Randomize Fireflies Motion
+//   @for $i from 1 through 30 {
+// 	$steps: random(12) + 16;
+// 	$rotationSpeed: random(10) + 8s;
+
+// 	.firefly:nth-child(#{$i}) {
+// 	  animation-name: move#{$i};
+
+// 	  &::before {
+// 		animation-duration: #{$rotationSpeed};
+// 	  }
+
+// 	  &::after {
+// 		animation-duration: #{$rotationSpeed}, random(6000) + 5000ms;
+// 		animation-delay: 0ms, random(8000) + 500ms;
+// 	  }
+// 	}
+
+// 	@keyframes move#{$i} {
+// 	  @for $step from 0 through $steps {
+// 		#{$step * 100 / $steps}% {
+// 		  transform: translateX(random(100) - 50vw) translateY(random(100) - 50vh) scale(random(75) / 100 + 0.25);
+// 		}
+// 	  }
+// 	}
+//   }
+
+//   @keyframes drift {
+// 	0% {
+// 	  transform: rotate(0deg);
+// 	}
+
+// 	100% {
+// 	  transform: rotate(360deg);
+// 	}
+//   }
+
+//   @keyframes flash {
+// 	0%, 30%, 100% {
+// 	  opacity: 0;
+// 	  box-shadow: 0 0 0vw 0vw yellow;
+// 	}
+
+// 	5% {
+// 	  opacity: 1;
+// 	  box-shadow: 0 0 2vw 0.4vw yellow;
+// 	}
+//   }

@@ -1,13 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/main.css">
-    <title>Quarn Radio</title>
-</head>
-<body>
-    
-    <script src="./script/main.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<link
+			rel="stylesheet"
+			href="./main.css"
+		/>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+			integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+			defer
+		></script>
+		<script
+			src="./main.js"
+			defer
+		></script>
+		<title>Quarn Radio</title>
+	</head>
+	<body>
+		<div class="glitter-sm"></div>
+		<audio
+			class="audio-player"
+		>
+			<source
+				rel="noreferrer nofollow"
+				src="https://stream.radiojar.com/8s5u5tpdtwzuv"
+				type="audio/mp3"
+			/>
+			Your browser does not support the audio element.
+		</audio>
+
+		<div class="controls">
+			<button class="play" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+				<defs>
+				  <mask id="a">
+					<g fill="none" stroke-linejoin="round" stroke-width="4">
+					  <rect width="36" height="36" x="6" y="6" fill="#fff" stroke="#fff" stroke-linecap="round" rx="3"/>
+					  <path fill="#000" stroke="#000" d="M18.5 24v-7.794l6.75 3.897L32 24l-6.75 3.897-6.75 3.897z"/>
+					</g>
+				  </mask>
+				</defs>
+				<path fill="#fff" d="M0 0h48v48H0z" mask="url(#a)"/>
+			  </svg></button>
+			<button class="pause" disabled><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+				<path fill="#fff" d="M19 3H5c-1.1 0-2 .9-2 2v14a2 2 0 0 0 2 2h14c1.11 0 2-.89 2-2V5a2 2 0 0 0-2-2m-8 13H9V8h2zm4 0h-2V8h2z"/>
+			  </svg></button>
+		</div>
+	</body>
 </html>
