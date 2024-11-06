@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
 *,
 *::after,
 *::before {
@@ -8,6 +10,9 @@
 }
 
 body {
+	font-family: "Aref Ruqaa", serif;
+	font-weight: 400;
+	font-style: normal;
 	position: relative;
 	z-index: 0;
 	overflow: hidden;
@@ -17,11 +22,12 @@ body {
 	width: 100%;
 	background-image: url(../assets/img/bg-full.webp);
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: center bottom;
 	background-size: cover;
+	object-position: center;
+	object-fit: cover;
 	display: flex;
-	flex-grow: row wrap;
-	justify-content: center;
+	flex-flow: column nowrap;
 	align-items: center;
 	&::after {
 		position: absolute;
@@ -30,34 +36,33 @@ body {
 		height: 100vh;
 		width: 100vw;
 		background-color: rgba(255, 255, 255, 0.055);
-		backdrop-filter: grayscale(90%);
+		backdrop-filter: grayscale(80%);
 		z-index: -1;
 		content: '';
-	}
-	.glitter-sm {
-		height: 50px;
-		width: 50px;
-		border-radius: 25px;
-		position: absolute;
-		top: 50px;
-		left: 50px;
-		// background-color: rgba(255, 166, 0, 0.644);
-		filter: blur(5px);
-		backdrop-filter: blur(2px);
-		opacity: 0.3;
-		z-index: 1;
 	}
 	.audio-player {
 		display: none;
 		visibility: hidden;
 	}
-
+	h1 {
+		color: rgb(38 65 107);
+		background-color: #ffffff87;
+		padding: 0 10px 10px;
+		margin-top: 30px;
+		position: sticky;
+		font-size: clamp(2rem, 4vw, 3rem); ;
+	}
 	.controls {
 		padding: 20px 30px;
 		display: flex;
+		justify-content: center;
 		gap: 30px;
+		margin-right: 20px;
+		margin-left: 20px;
+		min-width: 80%;
+		margin-top: 200px;
 		box-shadow: 0px 1px 2px black;
-		backdrop-filter: saturate(10.5);
+		backdrop-filter: saturate(6);
 		.play,
 		.pause {
 			position: relative;
@@ -94,6 +99,23 @@ body {
 					pointer-events: none;
 				}
 			}
+		}
+	}
+	.details {
+		position: fixed;
+		bottom: 0;
+		margin: 20px 20px;
+		padding: 10px;
+		display: flex;
+		flex-flow: column nowrap;
+		gap: 20px;
+		font-size: 1.3rem;
+		color: rgb(38, 65, 107);
+		background-color: rgb(255 255 255 / 80%);
+		text-align: justify;
+		font-weight: 600;
+		.center {
+			text-align: center;
 		}
 	}
 }
