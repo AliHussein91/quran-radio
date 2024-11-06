@@ -29,6 +29,7 @@ body {
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
+	justify-content: space-between;
 	&::after {
 		position: absolute;
 		inset: 0;
@@ -60,7 +61,6 @@ body {
 		margin-right: 20px;
 		margin-left: 20px;
 		min-width: 80%;
-		margin-top: 200px;
 		box-shadow: 0px 1px 2px black;
 		backdrop-filter: saturate(6);
 		.play,
@@ -102,8 +102,6 @@ body {
 		}
 	}
 	.details {
-		position: fixed;
-		bottom: 0;
 		margin: 20px 20px;
 		padding: 10px;
 		display: flex;
