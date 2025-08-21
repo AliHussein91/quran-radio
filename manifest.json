@@ -1,6 +1,6 @@
 {
   "name": "Cairo Quran Radio",
-  "short_name": "Cairo Quran Radio",
+  "short_name": "Quran Radio",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -4,9 +4,20 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"watch": "sass --watch scss/main.scss ./main.css"
+		"watch": "sass --watch scss/main.scss ./main.css --style compressed",
+		"compile": "sass scss/main.scss ./dist/main.css --style compressed",
+		"minify:html": "html-minifier-terser --collapse-whitespace --remove-comments --minify-css true --minify-js true index.html -o ./dist/index.html",
+		"minify:js": "find . -type f -name \"*.js\" -not -path \"./node_modules/*\" -exec terser {} -o ./dist/{} --compress --mangle \\;",
+		"favicon": "find . -type f -name \"*.png\" -not -path \"./node_modules/*\" -exec npx favpie {} -o ./dist/favicon -ap \"Cairo Quran Radio\" -sn \"Quran Radio\" \\;",
+		"icons": "cp -rv icons dist/icons/",
+		"assets": "cp -rv assets dist/assets/",
+		"manifest": "cp manifest.json ./dist/manifest.json",
+		"build": "npm run compile && npm run minify:html && npm run minify:js && npm run favicon && npm run icons && npm run manifest && npm run assets"
 	},
 	"author": "Ali Hussein",
 	"license": "ISC",
-	"description": ""
+	"description": "",
+	"devDependencies": {
+		"sass": "^1.90.0"
+	}
 }

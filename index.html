@@ -6,17 +6,86 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
+		<meta
+			name="keywords"
+			content="إذاعة القرآن الكريم, القرآن الكريم, القاهرة, Quran Radio, Holy Quran, Cairo"
+		/>
 		<link
 			rel="stylesheet"
 			href="./main.css"
 		/>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-			integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-			crossorigin="anonymous"
-			referrerpolicy="no-referrer"
-			defer
-		></script>
+		<link
+			rel="icon"
+			type="image/png"
+			href="/favicon/favicon-32x32.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="48x48"
+			href="/favicon/favicon-48x48.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="72x72"
+			href="/favicon/favicon-72x72.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="96x96"
+			href="/favicon/favicon-96x96.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="256x256"
+			href="/favicon/favicon-256x256.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="384x384"
+			href="/favicon/favicon-384x384.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="512x512"
+			href="/favicon/favicon-512x512.png"
+		/>
+
+		<link
+			rel="icon"
+			type="image/png"
+			href="/favicon/favicon-32x32.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="48x48"
+			href="/favicon/favicon-48x48.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="72x72"
+			href="/favicon/favicon-72x72.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="96x96"
+			href="/favicon/favicon-96x96.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="256x256"
+			href="/favicon/favicon-256x256.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="384x384"
+			href="/favicon/favicon-384x384.png"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="512x512"
+			href="/favicon/favicon-512x512.png"
+		/>
+
 		<script
 			src="./main.js"
 			defer
@@ -36,7 +105,7 @@
 		/>
 
 		<meta
-			name="apple-mobile-web-app-capable"
+			name="mobile-web-app-capable"
 			content="yes"
 		/>
 
@@ -230,7 +299,11 @@
 			href="icons/apple-splash-1136-640.jpg"
 			media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
 		/>
-		<title>Quarn Radio</title>
+		<title>إذاعة القرآن الكريم من القاهرة</title>
+		<meta
+			name="description"
+			content="استمع إلى إذاعة القرآن الكريم من القاهرة على مدار الساعة. بث مباشر للقرآن الكريم بصوت قراء عالميين."
+		/>
 	</head>
 	<body>
 		<audio class="audio-player">
@@ -243,7 +316,10 @@
 		</audio>
 		<h1>إذاعة القرآن الكريم من القاهرة</h1>
 		<div class="controls">
-			<button class="play">
+			<button
+				class="play"
+				aria-label="Play"
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 48 48"
@@ -283,6 +359,7 @@
 			<button
 				class="pause"
 				disabled
+				aria-label="Pause"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
