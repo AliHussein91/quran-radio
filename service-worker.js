@@ -6,6 +6,9 @@ self.addEventListener('install', (event) => {
 				'/index.html',
 				'/main.css',
 				'/main.js',
+				'/assets/bg-full.webp',
+        '/fonts/ArefRuqaa-Bold.ttf',
+        '/fonts/ArefRuqaa-Regular.ttf',
 				'/icons/manifest-icon-192.maskable.png',
 				'/icons/manifest-icon-512.maskable.png',
 			]);

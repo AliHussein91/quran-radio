@@ -11,8 +11,9 @@
 		"favicon": "find . -type f -name \"*.png\" -not -path \"./node_modules/*\" -exec npx favpie {} -o ./dist/favicon -ap \"Cairo Quran Radio\" -sn \"Quran Radio\" \\;",
 		"icons": "cp -rv icons dist/icons/",
 		"assets": "cp -rv assets dist/assets/",
+		"fonts": "cp -rv fonts dist/fonts/",
 		"manifest": "cp manifest.json ./dist/manifest.json",
-		"build": "npm run compile && npm run minify:html && npm run minify:js && npm run favicon && npm run icons && npm run manifest && npm run assets"
+		"build": "npm run compile && npm run minify:html && npm run minify:js && npm run favicon && npm run icons && npm run manifest && npm run assets && npm run fonts"
 	},
 	"author": "Ali Hussein",
 	"license": "ISC",
