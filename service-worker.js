@@ -14,6 +14,14 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+	const url = new URL(event.request.url);
+
+	// 🔹 If it's the radio stream, bypass SW and go directly to network
+	if (url.pathname.startsWith('/radio/')) {
+		return;
+	}
+
+	// Otherwise use cache-first strategy
 	event.respondWith(
 		caches.match(event.request).then((response) => {
 			return response || fetch(event.request);
