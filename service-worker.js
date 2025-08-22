@@ -25,10 +25,17 @@ self.addEventListener('fetch', (event) => {
 		return;
 	}
 
-	// Otherwise use cache-first strategy
-	event.respondWith(
-		caches.match(event.request).then((response) => {
-			return response || fetch(event.request);
-		})
-	);
+	if (event.request.mode === 'navigate') {
+		// For navigation requests, return cached index.html as fallback
+		event.respondWith(
+			fetch(event.request).catch(() => caches.match('/index.html'))
+		);
+	} else {
+		// Cache-first for other resources
+		event.respondWith(
+			caches.match(event.request).then((response) => {
+				return response || fetch(event.request);
+			})
+		);
+	}
 });
