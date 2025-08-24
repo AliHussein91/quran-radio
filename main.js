@@ -1,32 +1,107 @@
-const body = document.querySelector('body');
-
+// --- DOM Elements ---
 const player = document.querySelector('.audio-player');
-player.autoplay = false;
+const playBtn = document.querySelector('.play');
+const pauseBtn = document.querySelector('.pause');
+const installBtn = document.querySelector('.installBtn');
 
-const play = document.querySelector('.play');
-const pause = document.querySelector('.pause');
-
+// --- Constants ---
 const STREAM_URL = 'https://quran-radio.meetali.online/radio/8s5u5tpdtwzuv';
 
-play.addEventListener('click', () => {
-	player.src = STREAM_URL + '?cacheBuster=' + new Date().getTime();
-	player.play().catch((err) => {
-		console.error('Autoplay blocked:', err);
+// --- Player Logic ---
+player.autoplay = false;
+
+/**
+ * Updates the UI of the player controls.
+ * @param {boolean} isPlaying - True if the audio is currently playing.
+ */
+function updatePlayerState(isPlaying) {
+	if (isPlaying) {
+		pauseBtn.disabled = false;
+		playBtn.disabled = true;
+		playBtn.classList.add('hidden');
+		pauseBtn.classList.remove('hidden');
+	} else {
+		pauseBtn.disabled = true;
+		playBtn.disabled = false;
+		playBtn.classList.remove('hidden');
+		pauseBtn.classList.add('hidden');
+	}
+}
+
+/**
+ * Sets up the Media Session API for native OS controls.
+ */
+function setupMediaSession() {
+	if (!('mediaSession' in navigator)) {
+		return;
+	}
+
+	navigator.mediaSession.metadata = new MediaMetadata({
+		title: 'إذاعة القرآن الكريم',
+		artist: 'من القاهرة',
+		album: 'بث مباشر',
+		artwork: [
+			{
+				src: '/icons/manifest-icon-192.maskable.png',
+				sizes: '192x192',
+				type: 'image/png',
+			},
+			{
+				src: '/icons/manifest-icon-512.maskable.png',
+				sizes: '512x512',
+				type: 'image/png',
+			},
+		],
 	});
-	pause.disabled = false;
-	play.disabled = true;
-	play.classList.add('hidden');
-	pause.classList.remove('hidden');
+
+	navigator.mediaSession.setActionHandler('play', () => playBtn.click());
+	navigator.mediaSession.setActionHandler('pause', () => pauseBtn.click());
+}
+
+/**
+ * Shows a non-blocking error message to the user.
+ * @param {string} message - The error message to display.
+ */
+function showError(message) {
+	// Remove any existing error message
+	const existingError = document.querySelector('.error-message');
+	if (existingError) {
+		existingError.remove();
+	}
+
+	const errorEl = document.createElement('p');
+	errorEl.className = 'error-message'; // You will need to style this class in main.css
+	errorEl.textContent = message;
+	errorEl.dir = 'rtl'; // Ensure correct text direction
+	document.querySelector('.controls').insertAdjacentElement('afterend', errorEl);
+
+	// Automatically remove the message after 5 seconds
+	setTimeout(() => errorEl.remove(), 5000);
+}
+
+
+// --- Event Listeners ---
+playBtn.addEventListener('click', () => {
+	player.src = STREAM_URL + '?cacheBuster=' + new Date().getTime();
+	player.play()
+		.then(() => {
+			updatePlayerState(true);
+			setupMediaSession();
+		})
+		.catch((err) => {
+			console.error('Playback failed:', err);
+			showError('حدث خطأ أثناء تحميل البث. يرجى المحاولة مرة أخرى.');
+			updatePlayerState(false);
+		});
 });
 
-pause.addEventListener('click', () => {
+pauseBtn.addEventListener('click', () => {
 	player.pause();
-	pause.disabled = true;
-	play.disabled = false;
-	play.classList.remove('hidden');
-	pause.classList.add('hidden');
+	player.src = ""; // Stop buffering
+	updatePlayerState(false);
 });
 
+// --- Service Worker Registration ---
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', () => {
 		navigator.serviceWorker
@@ -36,60 +111,41 @@ if ('serviceWorker' in navigator) {
 	});
 }
 
+// --- PWA Installation Logic ---
 let deferredPrompt;
 
-const installBtn = document.querySelector('.installBtn');
-
-// Helper: hide install button
 function hideInstallButton() {
 	if (installBtn) {
 		installBtn.style.display = 'none';
 	}
 }
 
-// Helper: show install button
 function showInstallButton() {
 	if (installBtn) {
 		installBtn.style.display = 'block';
 	}
 }
 
-// Detect if already installed (standalone mode)
-const isInStandaloneMode =
-	window.matchMedia('(display-mode: standalone)').matches ||
-	window.navigator.standalone === true;
-
-if (isInStandaloneMode) {
+// Hide button if already installed
+if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
 	hideInstallButton();
 } else {
 	window.addEventListener('beforeinstallprompt', (e) => {
-		// Prevent Chrome’s mini-infobar
 		e.preventDefault();
 		deferredPrompt = e;
-
 		showInstallButton();
 
-		installBtn?.addEventListener(
-			'click',
-			async () => {
-				hideInstallButton();
-
-				if (!deferredPrompt) return;
-
-				// Show the browser install prompt
-				deferredPrompt.prompt();
-
-				const {outcome} = await deferredPrompt.userChoice;
-
-				// Clear the saved event
-				deferredPrompt = null;
-			},
-			{once: true}
-		);
+		installBtn?.addEventListener('click', async () => {
+			hideInstallButton();
+			if (!deferredPrompt) return;
+			deferredPrompt.prompt();
+			// We don't need to await the result, the 'appinstalled' event will handle it.
+			deferredPrompt = null;
+		}, { once: true });
 	});
 }
 
-// When successfully installed
 window.addEventListener('appinstalled', () => {
 	hideInstallButton();
+	console.log('PWA was installed');
 });
