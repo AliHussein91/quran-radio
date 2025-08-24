@@ -196,7 +196,7 @@ body {
 	.installBtn {
 		position: fixed;
 		bottom: 10px;
-		right: 10px;		
+		right: 10px;
 		padding: 7px;
 		color: rgb(255, 255, 255);
 		background-color: rgb(36, 156, 52);
@@ -243,4 +243,14 @@ body {
 			transform: scale(0.98);
 		}
 	}
+}
+
+.error-message {
+	color: red;
+	font-size: 1rem;
+	font-weight: 400;
+	text-align: center;
+	margin: 10px 0;
+	background-color: #ffffff87;
+	padding: 0 10px 10px;
 }
