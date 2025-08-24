@@ -1,3 +1,34 @@
+// --- In-App Browser Detection ---
+(function() {
+    const isFacebookApp = /FBAV|FBAN/.test(navigator.userAgent);
+
+    if (isFacebookApp) {
+        // Create a banner element
+        const banner = document.createElement('div');
+        banner.innerHTML = `
+            <p>لأفضل تجربة ولتتمكن من تثبيت التطبيق، يرجى الضغط على القائمة (⋮) واختيار "فتح في المتصفح".</p>
+            <style>
+                #in-app-banner {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    background-color: #ffc107; /* A noticeable yellow color */
+                    color: #000;
+                    text-align: center;
+                    padding: 12px;
+                    font-size: 14px;
+                    z-index: 1000;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                    font-family: sans-serif;
+                }
+            </style>
+        `;
+        banner.id = 'in-app-banner';
+        document.body.prepend(banner);
+    }
+})();
+
 // --- DOM Elements ---
 const player = document.querySelector('.audio-player');
 const playBtn = document.querySelector('.play');
